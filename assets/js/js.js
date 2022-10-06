@@ -1,5 +1,6 @@
 var now = moment().format("H");
 
+now = 1100;
 
 $(document).ready(function () {
 
@@ -21,7 +22,7 @@ $(document).ready(function () {
     // To continuously call the functions, we will use setInterval
     setInterval(updateTime, 1000);
 
-    displayUpdate();
+    // displayUpdate();
     checkTime();
 })
 
@@ -31,8 +32,6 @@ function displayUpdate() {
         $(this).parent().siblings(".description").removeClass("present").removeClass("past").removeClass("future");
     });
 };
-
-checkTime();
 
 function checkTime() {
 
@@ -50,29 +49,10 @@ function checkTime() {
                 $(this).parent().siblings(".description").addClass("future");
             }
         }
-
-
     });
 
 }
 
 
 
-
-
-//use jquery to update the classes
-
-//use jquery to select all displayHour
-$(".displayHour")
-//iterate through them
-
-var check = 2;
-
-
-
-//if they are less than now add class past
-//else if they are equal add class present
-//else add all to class future
-
-//closest(".description")
 
