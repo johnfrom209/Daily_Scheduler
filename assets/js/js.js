@@ -1,6 +1,7 @@
 var now = moment().format("H");
+now = 1100;//hard coding to check if classes are working
 
-now = 1100;
+var savedData; //text data we want to save and load on refresh
 
 $(document).ready(function () {
 
@@ -24,6 +25,11 @@ $(document).ready(function () {
 
     // displayUpdate();
     checkTime();
+
+    //display the saved text
+    displayToScreen();
+
+    loadfromLS();
 })
 
 function displayUpdate() {
@@ -53,6 +59,57 @@ function checkTime() {
 
 }
 
+$(".saveBtn").on("click", function () {
+
+    //use this to save to the object
+    var saveId = $(this).siblings(".timeDisplay").children().attr("id");
+    //grabbing object 
+    var day = loadfromLS();
+    //this saves the property that is saveId to the val in the text area
+    day[saveId] = $(this).siblings(".description").val();
+
+    //save to LS
+    saveToLS(day);
+});
+
+function loadfromLS() {
+
+    //load from LS
+    var info = JSON.parse(localStorage.getItem("Day"));
+    //if nothing in the save create object with time properties
+    if (info == null) {
+        info = {
+            900: "",
+            1000: "",
+            1100: "",
+            1200: "",
+            1300: "",
+            1400: "",
+            1500: "",
+            1600: "",
+            1700: "",
+        }
+    }
+    return info;
+}
+
+function saveToLS(day) {
+    localStorage.setItem("Day", JSON.stringify(day))
+}
+
+function displayToScreen() {
+
+    var day = loadfromLS();
+    $(".displayHour").each(function () {
+        //grab the id
+        var tempId = $(this).attr("id");
+        //sets the textarea from the saved data
+        $(this).parent().siblings(".description").val(day[tempId]);
+    });
 
 
 
+
+
+
+}
