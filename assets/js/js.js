@@ -1,7 +1,4 @@
 var now = moment().format("H");
-now = 1100;//hard coding to check if classes are working
-
-var savedData; //text data we want to save and load on refresh
 
 $(document).ready(function () {
 
@@ -12,9 +9,9 @@ $(document).ready(function () {
     // Current Time
     // Here we want to use setInterval to constantly update the time
     let updateTime = function () {
-        let currentTime = moment().format('h:mm:ss')
+        let currentTime = moment().format('h:mm:ss');
         //change this to set a var and use that to update past, present and future
-        $("#time").text(currentTime)
+        $("#time").text(currentTime);
     }
 
     // To initally set the times, we will call the functions
@@ -39,6 +36,7 @@ function displayUpdate() {
     });
 };
 
+//grabs all classes with displayHour
 function checkTime() {
 
     $(".displayHour").each(function () {
@@ -106,10 +104,5 @@ function displayToScreen() {
         //sets the textarea from the saved data
         $(this).parent().siblings(".description").val(day[tempId]);
     });
-
-
-
-
-
 
 }
