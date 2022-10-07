@@ -23,7 +23,7 @@ $(".saveBtn").on("click", function () {
     saveToLS(day);
 });
 ```
-Once I checked the time was during work day hours, I went ahead and compared the time to set the background colors. I did so by adding the class that was appropriate to the hour. If it was past I greyed it out. If it was during that hour I sent the class to present, and the last defaults to furture. 
+Once I checked the time was during work day hours, I went ahead and compared the time to set the background colors. I did so by adding the class that was appropriate to the hour. If it was a past hour I greyed it out. If it was during that hour I sent the class to present, and the last defaults to furture. 
 
 ```javascript
 if ($(this).attr("id") == now) {
@@ -36,7 +36,6 @@ if ($(this).attr("id") == now) {
                 $(this).parent().siblings(".description").addClass("future");
             }
 ```
-
 
 ## Installation
 

@@ -1,4 +1,4 @@
-var now = moment().format("H");
+var now = moment().format("H00");
 
 $(document).ready(function () {
 
@@ -19,6 +19,7 @@ $(document).ready(function () {
 
     // To continuously call the functions, we will use setInterval
     setInterval(updateTime, 1000);
+    setInterval(timeDisplay, 60000); // check every min
 
     // displayUpdate();
     checkTime();
@@ -28,6 +29,14 @@ $(document).ready(function () {
 
     loadfromLS();
 })
+
+function timeDisplay() {
+
+    if (moment().format("H00") > Number(now)) {
+        now = moment().format("H00");
+        checkTime();
+    }
+}
 
 function displayUpdate() {
 
@@ -39,22 +48,19 @@ function displayUpdate() {
 //grabs all classes with displayHour
 function checkTime() {
 
-    $(".displayHour").each(function () {
-
-        if (now <= 1700 && now >= 900) {
-            if ($(this).attr("id") == now) {
-
-                $(this).parent().siblings(".description").addClass("present");
+    if (now <= 1700 && now >= 900) {
+        $(".displayHour").each(function () {
+            if ($(this).attr("id") == Number(now)) {
+                $(this).parent().siblings(".description").addClass("present").removeClass("past").removeClass("future");
             }
-            else if ($(this).attr("id") <= now) {
-                $(this).parent().siblings(".description").addClass("past");
-            }
-            else {
+            else if ($(this).attr("id") > Number(now)) {
                 $(this).parent().siblings(".description").addClass("future");
             }
-        }
-    });
-
+            else if ($(this).attr("id") < Number(now)) {
+                $(this).parent().siblings(".description").addClass("past").removeClass("future").removeClass("present");
+            }
+        });
+    }
 }
 
 $(".saveBtn").on("click", function () {
